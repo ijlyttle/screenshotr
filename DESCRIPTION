@@ -1,0 +1,11 @@
+Package: screenshotr
+Title: What the Package Does (one line, title case)
+Version: 0.0.0.9000
+Authors@R: 'Ian Lyttle <ian.lyttle@schneider-electric.com> [aut, cre]'
+Description: What the package does (one paragraph).
+Depends: R (>= 3.3.2)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/ijlyttle/screenshotr
+BugReports: https://github.com/ijlyttle/screenshotr/issues
