@@ -9,3 +9,5 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ijlyttle/screenshotr
 BugReports: https://github.com/ijlyttle/screenshotr/issues
+Imports: shiny,
+    miniUI
