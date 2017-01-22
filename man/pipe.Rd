@@ -10,4 +10,5 @@
 Like dplyr, bsplus also uses the pipe function, \code{\%>\%} to turn
 function composition into a series of imperative statements.
 }
+\keyword{internal}
 
