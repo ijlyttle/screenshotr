@@ -1,5 +1,11 @@
 screenshotr <- function(){
 
+  html_help <-
+    system.file("markdown", "screenshotr_help.md", package = "screenshotr") %>%
+    readr::read_file() %>%
+    commonmark::markdown_html() %>%
+    shiny::HTML()
+
   input_scale <-
     shiny::numericInput(
       inputId = "scale",
@@ -34,8 +40,8 @@ screenshotr <- function(){
 
   input_format <-
     shiny::radioButtons(
-      inputId = "format",
-      label = "Path format",
+      inputId = "path_format",
+      label = "Text format",
       choices = c(
         "Markdown image" = "markdown",
         "HTML src attribute" = "html",
@@ -57,27 +63,15 @@ screenshotr <- function(){
       class = "btn-primary"
     )
 
-  output_original_image <-
+  output_status <-
     shiny::verbatimTextOutput(
-      outputId = "original_image",
-      placeholder = TRUE
-    )
-
-  output_scaled_image <-
-    shiny::verbatimTextOutput(
-      outputId = "scaled_image",
-      placeholder = TRUE
-    )
-
-  output_path_format <-
-    shiny::verbatimTextOutput(
-      outputId = "path_format",
+      outputId = "status",
       placeholder = TRUE
     )
 
   panel_controls <-
     miniUI::miniTabPanel(
-      title = "Controls",
+      title = "Template",
       icon = shiny::icon("sliders"),
       miniUI::miniContentPanel(
         shiny::fillCol(
@@ -92,23 +86,7 @@ screenshotr <- function(){
               input_format
             )
           ),
-          output_original_image
-          # shiny::tags$hr(),
-          # shiny::fillRow(
-          #   flex = c(2, 5),
-          #   shiny::tags$h5("Original image"),
-          #   output_original_image
-          # ),
-          # shiny::fillRow(
-          #   flex = c(2, 5),
-          #   shiny::tags$h5("Scaled image"),
-          #   output_scaled_image
-          # ),
-          # shiny::fillRow(
-          #   flex = c(2, 5),
-          #   shiny::tags$h5("Path format"),
-          #   output_path_format
-          # )
+          output_status
         )
       )
     )
@@ -133,11 +111,14 @@ screenshotr <- function(){
   panel_help <-
     miniUI::miniTabPanel(
       title = "Help",
-      icon = shiny::icon("info-circle")
+      icon = shiny::icon("info-circle"),
+      miniUI::miniContentPanel(
+        html_help
+      )
     )
 
   ui <- miniUI::miniPage(
-    gadgetTitleBar("Screenshot helper", right = NULL),
+    miniUI::gadgetTitleBar("Screenshot helper", right = NULL),
     miniUI::miniTabstripPanel(
       panel_image,
       panel_controls,
@@ -147,8 +128,30 @@ screenshotr <- function(){
 
   server <- function(input, output, session){
 
+    rct_text_path_format <- shiny::reactive({
+
+      sample <- c(
+        markdown = "![](img/sample.png)",
+        html = "src = \"img/sample.png\"",
+        as_is = "img/sample.png"
+      )
+
+      sample[input$path_format]
+
+    })
+
+    output$status <-
+      shiny::renderText({
+        paste(
+          paste("Pasted image:", sep = "\t"),
+          paste("Scaled image:", sep = "\t"),
+          paste("Text format:", rct_text_path_format(), sep = "\t"),
+          sep = "\n"
+        )
+
+      })
   }
 
-  shiny::runGadget(ui, server)
+  shiny::runGadget(ui, server, viewer = shiny::paneViewer(425))
 
 }

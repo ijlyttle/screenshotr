@@ -1,5 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis-CI Build Status](https://travis-ci.org/ijlyttle/screenshotr.svg?branch=master)](https://travis-ci.org/ijlyttle/screenshotr) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/screenshotr)](https://cran.r-project.org/package=screenshotr)
+
 screenshotr
 ===========
 
