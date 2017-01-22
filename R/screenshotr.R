@@ -81,7 +81,7 @@ screenshotr <- function(){
       icon = shiny::icon("sliders"),
       miniUI::miniContentPanel(
         shiny::fillCol(
-          flex = c(4, NA, 1, 1, 1),
+          flex = c(1, NA),
           shiny::fillRow(
             shiny::fillCol(
               input_scale,
@@ -92,22 +92,23 @@ screenshotr <- function(){
               input_format
             )
           ),
-          shiny::tags$hr(),
-          shiny::fillRow(
-            flex = c(2, 5),
-            shiny::tags$h5("Original image"),
-            output_original_image
-          ),
-          shiny::fillRow(
-            flex = c(2, 5),
-            shiny::tags$h5("Scaled image"),
-            output_scaled_image
-          ),
-          shiny::fillRow(
-            flex = c(2, 5),
-            shiny::tags$h5("Path format"),
-            output_path_format
-          )
+          output_original_image
+          # shiny::tags$hr(),
+          # shiny::fillRow(
+          #   flex = c(2, 5),
+          #   shiny::tags$h5("Original image"),
+          #   output_original_image
+          # ),
+          # shiny::fillRow(
+          #   flex = c(2, 5),
+          #   shiny::tags$h5("Scaled image"),
+          #   output_scaled_image
+          # ),
+          # shiny::fillRow(
+          #   flex = c(2, 5),
+          #   shiny::tags$h5("Path format"),
+          #   output_path_format
+          # )
         )
       )
     )
@@ -120,7 +121,7 @@ screenshotr <- function(){
         padding = 0,
         shiny::fillCol(
           flex = c(1, NA),
-          shiny::imageOutput(outputId = "image"),
+          shiny::imageOutput(outputId = "image", height = "100%"),
           miniUI::miniButtonBlock(
             input_paste,
             input_save
