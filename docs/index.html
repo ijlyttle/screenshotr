@@ -40,16 +40,28 @@
 
 <div id="screenshotr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor"><a href="#screenshotr" class="anchor"> </a>screenshotr</h1></div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor"><a href="#installation" class="anchor"> </a>Installation</h2>
+<p>This package is not yet on CRAN. You can install the latest development version from github with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
+devtools::<span class="kw">install_github</span>(<span class="st">"ijlyttle/screenshotr"</span>)</code></pre></div>
+<p>Installing this package should append an addin to your RStudio IDE <em>Addins</em> menu.</p>
+<p>You can launch the addin using the <em>Addins</em> menu, or you can call the function from the command line:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"screenshotr"</span>)
+<span class="kw"><a href="reference/screenshotr.html">screenshotr</a></span>()</code></pre></div>
+</div>
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor"><a href="#introduction" class="anchor"> </a>Introduction</h2>
 <p>The goal of this package is to support a <strong>shiny</strong> gadget as an RStudio addin.</p>
 <p>This addin will make it easier for you to insert screenshots into your R Markdown documents.</p>
 <p>It is imagined that, to use the addin, you would follow these steps:</p>
 <ol style="list-style-type: decimal"><li><p>Take the screenshot normally. On Mac, I find cmd-ctrl-shift-4 to be very useful.</p></li>
 <li><p>In RStudio&rsquo;s file-editor pane, place the cursor where you would like to insert your <code>![]()</code> code.</p></li>
-<li><p>On the addin, Click the paste-image button to paste the image to the addin.</p></li>
+<li><p>On the addin, Click the <strong>Paste new</strong> button to paste the image to the addin.</p></li>
 <li><p>Specify the image scaling.</p></li>
-<li><p>Save the rescaled image to your filesystem.</p></li>
-<li><p>Click the paste-code button.</p></li>
-</ol><p>I imagine this will be use the <strong>clipr</strong> package and the <strong>magick</strong> package.</p>
+<li><p>Click the <strong>Save as</strong> button to save the rescaled image to your filesystem. This will paste an embed code into your open document, or copy the embed code to your clipboard.</p></li>
+</ol><p>I imagine this will use the <strong>clipr</strong> package and the <strong>magick</strong> package.</p>
+</div>
 </div>
 </div>
   </div>
@@ -61,10 +73,12 @@
 <p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE">LICENSE</a></p>
 <h2>Developers</h2><ul class="list-unstyled"><li>Ian Lyttle <br><small class="roles"> Author, maintainer, copyright&nbsp;holder </small> </li>
 <li><a href="authors.html">All authors...</a></li>
-</ul><html><body><h2>Dev status</h2><ul class="list-unstyled"><li><a href="https://travis-ci.org/ijlyttle/screenshotr">
-  <img src="https://travis-ci.org/ijlyttle/screenshotr.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://cran.r-project.org/package=screenshotr">
+</ul><html><body><h2>Dev status</h2><ul class="list-unstyled"><li><a href="https://cran.r-project.org/package=screenshotr">
   <img src="http://www.r-pkg.org/badges/version/screenshotr" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://travis-ci.org/ijlyttle/screenshotr">
+  <img src="https://travis-ci.org/ijlyttle/screenshotr.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://codecov.io/github/ijlyttle/screenshotr?branch=master">
+  <img src="https://img.shields.io/codecov/c/github/ijlyttle/screenshotr/master.svg" alt="Coverage Status"></a></li>
 </ul></body></html></div>
 
 </div>

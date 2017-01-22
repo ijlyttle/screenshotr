@@ -1,3 +1,12 @@
+#' Screenshot helper
+#'
+#' @return none, called for side-effects
+#' @examples
+#' \dontrun{
+#' screenshotr()
+#' }
+#' @export
+#'
 screenshotr <- function(){
 
   html_help <-
