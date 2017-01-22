@@ -7,47 +7,72 @@ screenshotr <- function(){
       value = 0.25,
       min = 0,
       max = Inf,
-      step = 0.25
+      step = 0.25,
+      width = 150
     )
 
   input_save_action <-
     shiny::radioButtons(
       inputId = "save",
-      label = "Action after Save",
+      label = "Post-save action",
       choices = c(
-        "Copy text to clipboard",
-        "Insert text into source",
-        "None"
+        "Copy relative-path to clipboard" = "copy",
+        "Insert relative-path into source" = "insert",
+        "None" = "none"
       )
     )
 
   input_path_anchor <-
     shiny::radioButtons(
       inputId = "path_anchor",
-      label = "Path anchor",
+      label = "Directory anchor",
       choices = c(
-        "source document",
-        "project root"
+        "Source document",
+        "Project root"
       )
     )
 
   input_format <-
-    shiny::checkboxInput(
-      inputId = "use_markdown",
-      label = "Use markdown image"
+    shiny::radioButtons(
+      inputId = "format",
+      label = "Path format",
+      choices = c(
+        "Markdown image" = "markdown",
+        "HTML src attribute" = "html",
+        "As-is" = "as_is"
+      )
     )
-
 
   input_paste <-
     shiny::actionButton(
       inputId = "paste",
-      label = shiny::tags$span("Paste new")
+      label = shiny::tags$span("Paste new"),
+      class = "btn-primary"
     )
 
   input_save <-
     shiny::actionButton(
       inputId = "save",
-      label = shiny::tags$span("Save")
+      label = shiny::tags$span("Save as"),
+      class = "btn-primary"
+    )
+
+  output_original_image <-
+    shiny::verbatimTextOutput(
+      outputId = "original_image",
+      placeholder = TRUE
+    )
+
+  output_scaled_image <-
+    shiny::verbatimTextOutput(
+      outputId = "scaled_image",
+      placeholder = TRUE
+    )
+
+  output_path_format <-
+    shiny::verbatimTextOutput(
+      outputId = "path_format",
+      placeholder = TRUE
     )
 
   panel_controls <-
@@ -55,10 +80,35 @@ screenshotr <- function(){
       title = "Controls",
       icon = shiny::icon("sliders"),
       miniUI::miniContentPanel(
-        input_scale,
-        input_save_action,
-        input_path_anchor,
-        input_format
+        shiny::fillCol(
+          flex = c(4, NA, 1, 1, 1),
+          shiny::fillRow(
+            shiny::fillCol(
+              input_scale,
+              input_save_action
+            ),
+            shiny::fillCol(
+              input_path_anchor,
+              input_format
+            )
+          ),
+          shiny::tags$hr(),
+          shiny::fillRow(
+            flex = c(2, 5),
+            shiny::tags$h5("Original image"),
+            output_original_image
+          ),
+          shiny::fillRow(
+            flex = c(2, 5),
+            shiny::tags$h5("Scaled image"),
+            output_scaled_image
+          ),
+          shiny::fillRow(
+            flex = c(2, 5),
+            shiny::tags$h5("Path format"),
+            output_path_format
+          )
+        )
       )
     )
 
@@ -86,6 +136,7 @@ screenshotr <- function(){
     )
 
   ui <- miniUI::miniPage(
+    gadgetTitleBar("Screenshot helper", right = NULL),
     miniUI::miniTabstripPanel(
       panel_image,
       panel_controls,
